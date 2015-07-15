@@ -7,11 +7,10 @@ require_once(DOKU_PLUGIN.'action.php');
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl2.html)
  * @author     Adrian Schlegel <adrian.schlegel@liip.ch>
  * @author     Robert Bronsdon <reashlin@gmail.com>
+ * @author Martin Gross <martin@pc-coholic.de>
  */
 
-class action_plugin_recaptcha extends DokuWiki_Action_Plugin {
-
-    private $recaptchaLangs = array('en', 'nl', 'fr', 'de', 'pt', 'ru', 'es', 'tr');
+class action_plugin_recaptcha2 extends DokuWiki_Action_Plugin {
 
     /**
      * register an event hook
@@ -95,25 +94,8 @@ class action_plugin_recaptcha extends DokuWiki_Action_Plugin {
      */
     function insert(&$event, $param) {
         global $conf;
-
-        $helper = plugin_load('helper','recaptcha');
-        $recaptcha = '<div style="width: 320px;"></div>';
-		// by default let's assume that protocol is http
-		$use_ssl = false;
-		// trying to find https in current url
-		if(preg_match('/^https:\/\/.*/', DOKU_URL)){
-			$use_ssl = true;
-		}
-        // see first if a language is defined for the plugin, if not try to use the language defined for dokuwiki
-        $lang = $this->getConf('lang') ? $this->getConf('lang') : (in_array($conf['lang'], $this->recaptchaLangs) ? $conf['lang'] : 'en');
-        $recaptcha .= "<script type='text/javascript'>
-            var RecaptchaOptions = {";
-        $recaptcha .= $this->getConf('theme') ? "theme: '".$this->getConf('theme')."'," : '';
-        $recaptcha .= "lang: '".$lang."'";
-        $recaptcha .= "
-    };
-    </script>";
-        $recaptcha .= $helper->getHTML($use_ssl);
+        $helper = plugin_load('helper','recaptcha2');
+        $recaptcha = $helper->getHTML($param['editform']);
 
         if($param['oldhook']) {
             echo $recaptcha;
@@ -145,10 +127,10 @@ class action_plugin_recaptcha extends DokuWiki_Action_Plugin {
           ){
 
             // Check the recaptcha answer and only submit if correct
-            $helper = plugin_load('helper', 'recaptcha');
+            $helper = plugin_load('helper', 'recaptcha2');
             $resp = $helper->check();
 
-            if (!$resp->is_valid) {
+            if (!$resp->isSuccess()) {
                 if($act == 'save'){
                     // stay in preview mode
                     msg($this->getLang('testfailed'),-1);

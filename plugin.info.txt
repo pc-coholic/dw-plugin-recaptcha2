@@ -1,7 +1,9 @@
 # General Plugin Info do not edit
 
-author Adrian Schlegel, lsmith, Pierre Spring, Robert Bronsdon
-email  contact@liip.ch
-date   2009-12-10
-name   recaptcha
-desc   add a recaptcha to the register form
+author Martin Gross
+email  martin@pc-coholic.de
+date   2015-07-15
+name   recaptcha2
+desc   Add the new, simplified Recaptcha2 ("I am not a robot"-checkbox) to
+your register and edit-forms. Based on the recaptcha-plugin by Adrian Schlegel
+url    https://www.dokuwiki.org/plugin:recaptcha2
