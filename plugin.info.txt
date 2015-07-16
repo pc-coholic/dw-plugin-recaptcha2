@@ -1,5 +1,6 @@
 # General Plugin Info do not edit
 
+base   recaptcha2
 author Martin Gross
 email  martin@pc-coholic.de
 date   2015-07-15
