@@ -6,8 +6,8 @@
  * @author Martin Gross <martin@pc-coholic.de>
  */
 
-$conf['publickey']  = '';
-$conf['privatekey'] = '';
+$conf['publickey']  = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+$conf['privatekey'] = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
 $conf['theme'] = 'light';
 $conf['lang'] = '';
 $conf['regprotect'] = '1';
