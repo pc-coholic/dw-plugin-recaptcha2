@@ -2,7 +2,7 @@
 /**
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl2.html)
  * @author     Adrian Schlegel <adrian.schlegel@liip.ch>
- * @author Martin Gross <martin@pc-coholic.de>
+ * @author     Martin Gross <martin@pc-coholic.de>
  *
  */
 
@@ -29,9 +29,9 @@ class helper_plugin_recaptcha2 extends DokuWiki_Plugin {
      */
     function check() {
         // Check the recaptcha answer and only submit if correct
-	$recaptcha = new \ReCaptcha\ReCaptcha($this->getConf('privatekey'));
-	$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-	return $resp;
+      	$recaptcha = new \ReCaptcha\ReCaptcha($this->getConf('privatekey'));
+      	$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+      	return $resp;
     }
 
 
@@ -40,14 +40,13 @@ class helper_plugin_recaptcha2 extends DokuWiki_Plugin {
      * @return string 
      */
     function getHTML($editblock) {
-	$recaptchaLangs = array('en', 'nl', 'fr', 'de', 'pt', 'ru', 'es', 'tr');
-	$lang = $this->getConf('lang') ? $this->getConf('lang') : (in_array($conf['lang'], $recaptchaLangs) ? $conf['lang'] : 'en');
-	$stylewidth = $editblock ? "100%" : "75%";
-	$captchahtml = '<div class="g-recaptcha" data-sitekey="' . $this->getConf('publickey') . '" style="margin: 0 auto; display: block; width: '. $stylewidth . ';"></div>
+        $lang = $this->getConf('lang') ? $this->getConf('lang') : $conf['lang'];
+       	$stylewidth = $editblock ? "100%" : "75%";
+      	$captchahtml = '<div class="g-recaptcha" data-sitekey="' . $this->getConf('publickey') . '" data-theme="' . $this->getConf('theme') . '" style="margin: 0 auto; display: block; width: '. $stylewidth . ';"></div>
             <script type="text/javascript"
                     src="https://www.google.com/recaptcha/api.js?hl=' . $lang . '">
             </script>
             <br>';
-	return $captchahtml;
+       	return $captchahtml;
     }
 }

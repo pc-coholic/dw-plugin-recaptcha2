@@ -8,6 +8,7 @@
 
 $conf['publickey']  = '';
 $conf['privatekey'] = '';
+$conf['theme'] = 'light';
 $conf['lang'] = '';
 $conf['regprotect'] = '1';
 $conf['editprotect'] = '1';
