@@ -16,7 +16,7 @@ class action_plugin_recaptcha2 extends DokuWiki_Action_Plugin {
      * register an event hook
      *
      */
-    function register(&$controller)
+    function register(Doku_Event_Handler $controller)
     {
         // only register the hooks if the necessary config paramters exist
         if($this->getConf('publickey') && $this->getConf('privatekey')) {
