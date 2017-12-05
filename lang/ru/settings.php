@@ -7,8 +7,8 @@
  */
 
 
-$lang['publickey'] = "Публичный ключ Recaptcha (<a href='http://www.recaptcha.net/api/getkey?app=dokuwiki' target='_blank' title='http://recaptcha.net'>http://recaptcha.net</a>)";
-$lang['privatekey'] = "Приватный ключ Recaptcha (<a href='http://www.recaptcha.net/api/getkey?app=dokuwiki' target='_blank' title='http://recaptcha.net'>http://recaptcha.net</a>)";
+$lang['publickey'] = "Публичный ключ Recaptcha (<a href='https://www.google.com/recaptcha/admin' target='_blank' title='https://www.google.com/recaptcha/admin'>https://www.google.com/recaptcha/admin</a>)";
+$lang['privatekey'] = "Приватный ключ Recaptcha (<a href='https://www.google.com/recaptcha/admin' target='_blank' title='https://www.google.com/recaptcha/admin'>https://www.google.com/recaptcha/admin</a>)";
 $lang['theme'] = 'Тема';
 $lang['lang'] = "Язык (если не указано - использует предуказанный в DokuWiki язык) <a href='https://developers.google.com/recaptcha/docs/language' targe='_blank'>Допустимые языки</a>";
 $lang['regprotect'] = 'Защитить форму регистрации';
