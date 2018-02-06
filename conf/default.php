@@ -13,4 +13,5 @@ $conf['lang'] = '';
 $conf['regprotect'] = '1';
 $conf['editprotect'] = '1';
 $conf['forusers'] = '0';
+$conf['loginprotect'] = '1';
 

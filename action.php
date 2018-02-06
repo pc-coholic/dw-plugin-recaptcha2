@@ -20,6 +20,20 @@ class action_plugin_recaptcha2 extends DokuWiki_Action_Plugin {
     {
         // only register the hooks if the necessary config paramters exist
         if($this->getConf('publickey') && $this->getConf('privatekey')) {
+            if($this->getConf('loginprotect')) {
+                // inject in login form
+                $controller->register_hook('HTML_LOGINFORM_OUTPUT',
+                                           'BEFORE',
+                                           $this,
+                                           'insert',
+                                           array());
+                // check on login
+                $controller->register_hook('AUTH_LOGIN_CHECK',
+                                           'BEFORE',
+                                           $this,
+                                           'login_preprocess',
+                                           array());
+            }
             if($this->getConf('regprotect') || $this->getConf('editprotect')){
                     $controller->register_hook('ACTION_ACT_PREPROCESS',
                                                'BEFORE',
@@ -141,6 +155,34 @@ class action_plugin_recaptcha2 extends DokuWiki_Action_Plugin {
                     $_POST['save']  = false;
                 }
             }
+        }
+    }
+
+    /**
+     * process login action
+     *
+     * @param obj $event
+     * @param array $param
+     *
+     */
+    public function login_preprocess(Doku_Event $event, $param) {
+        global $INPUT;
+        if(!$this->getConf('loginprotect')) return; // no protection wanted
+        if(!$INPUT->bool('u')) return; // this login was not triggered by a form
+
+        // we need to have $ID set for the captcha check
+        global $ID;
+        $ID = getID();
+
+        /** @var helper_plugin_captcha $helper */
+        $helper = plugin_load('helper', 'recaptcha2');
+        $resp = $helper->check();
+
+        if(!$resp->isSuccess()) {
+            $event->data['silent'] = true; // we have our own message
+            $event->result = false; // login fail
+            $event->preventDefault();
+            $event->stopPropagation();
         }
     }
 
